@@ -1,8 +1,7 @@
 {
   "name": "@halodong/eslint-config-ts",
-  "version": "0.38.10",
-  "description": "",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com> (https://github.com/halodong/)",
+  "version": "0.38.11",
+  "author": "halodong <drl990114@gmail.com> (https://github.com/halodong/)",
   "license": "MIT",
   "homepage": "https://github.com/halodong/eslint-config",
   "keywords": [
