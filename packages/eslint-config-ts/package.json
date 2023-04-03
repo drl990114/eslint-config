@@ -1,6 +1,6 @@
 {
   "name": "@halodong/eslint-config-ts",
-  "version": "0.38.13",
+  "version": "0.38.14",
   "author": "halodong <drl990114@gmail.com> (https://github.com/halodong/)",
   "license": "MIT",
   "homepage": "https://github.com/halodong/eslint-config",
