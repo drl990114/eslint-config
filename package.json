@@ -1,6 +1,6 @@
 {
   "name": "@halodong/eslint-config-monorepo",
-  "version": "0.38.11",
+  "version": "0.38.12",
   "private": false,
   "packageManager": "pnpm@8.0.0",
   "author": "halodong <drl990114@gmail.com> (https://github.com/halodong/)",
