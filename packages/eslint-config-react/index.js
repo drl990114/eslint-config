@@ -90,15 +90,6 @@ module.exports = {
       version: 'detect',
     },
   },
-  overrides: isTsProject
-    ? [
-        {
-          files: ['**/*.{ts,tsx}'],
-          parser: '@typescript-eslint/parser',
-          extends: ['plugin:@typescript-eslint/recommended', '@halodong/eslint-config-ts'],
-        },
-      ]
-    : [],
 
   parserOptions,
 }
