@@ -33,7 +33,7 @@ module.exports = {
     '@babel/no-invalid-this': 0,
     '@babel/no-unused-expressions': 2,
     '@babel/object-curly-spacing': 0,
-    '@babel/semi': 2,
+    '@babel/semi': ["error", "never"],
     'react/display-name': 0,
     'react/jsx-props-no-spreading': 0,
     'react/state-in-constructor': 0,
