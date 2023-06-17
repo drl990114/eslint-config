@@ -24,7 +24,6 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    '@halodong/eslint-config-ts',
   ],
   parser: '@babel/eslint-parser',
   plugins: ['react', 'jest', '@babel', 'unicorn', 'react-hooks'],
@@ -90,6 +89,14 @@ module.exports = {
       version: 'detect',
     },
   },
+  overrides: isTsProject
+    ? [
+        {
+          files: ['**/*.{ts,tsx}'],
+          parser: '@typescript-eslint/parser',
+        },
+      ]
+    : [],
 
   parserOptions,
 }
