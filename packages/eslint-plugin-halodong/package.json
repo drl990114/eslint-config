@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-halodong",
-  "version": "0.38.17",
+  "version": "0.38.18",
   "license": "MIT",
   "author": "halodong <drl990114@gmail.com> (https://github.com/halodong/)",
   "main": "./dist/index.cjs",
