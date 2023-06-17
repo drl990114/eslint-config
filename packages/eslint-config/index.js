@@ -1,5 +1,5 @@
 module.exports = {
   extends: [
-    '@halodong/eslint-config-vue',
+    '@halodong/eslint-config-react',
   ],
 }
