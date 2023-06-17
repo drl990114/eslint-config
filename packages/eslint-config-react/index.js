@@ -95,7 +95,7 @@ module.exports = {
         {
           files: ['**/*.{ts,tsx}'],
           parser: '@typescript-eslint/parser',
-          extends: ['prettier', 'plugin:@typescript-eslint/recommended', '@halodong/eslint-config-ts'],
+          extends: ['plugin:@typescript-eslint/recommended', '@halodong/eslint-config-ts'],
         },
       ]
     : [],
