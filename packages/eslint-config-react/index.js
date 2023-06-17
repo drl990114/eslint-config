@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+const isTypeAwareEnabled = process.env.DISABLE_TYPE_AWARE === undefined;
+
 const parserOptions = {
   ecmaFeatures: {
     jsx: true,
