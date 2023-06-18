@@ -1,14 +1,19 @@
-const fs = require('fs')
-const path = require('path')
+import * as fs from 'fs'
+import * as path from 'path'
+import tsEslintConfig from './tsEslintConfig'
 
-const isTypeAwareEnabled = process.env.DISABLE_TYPE_AWARE === undefined;
+const isTypeAwareEnabled = process.env.DISABLE_TYPE_AWARE === undefined
 
 const parserOptions = {
   ecmaFeatures: {
     jsx: true,
   },
   babelOptions: {
-    presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-react',
+      '@babel/preset-typescript',
+    ],
     plugins: [
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
@@ -16,24 +21,52 @@ const parserOptions = {
   },
   requireConfigFile: false,
   project: isTypeAwareEnabled ? './tsconfig.json' : undefined,
-};
+}
 
-const isTsProject = fs.existsSync(path.join(process.cwd() || '.', './tsconfig.json'));
+const isJsMoreTs = async (path = 'src') => {
+  const fg = require('fast-glob')
+  const jsFiles = await fg(`${path}/src/**/*.{js,jsx}`, { deep: 3 })
+  const tsFiles = await fg(`${path}/src/**/*.{ts,tsx}`, { deep: 3 })
+  return jsFiles.length > tsFiles.length
+}
+
+const isTsProject = fs.existsSync(
+  path.join(process.cwd() || '.', './tsconfig.json'),
+)
+
+if (isTsProject) {
+  try {
+    isJsMoreTs(process.cwd()).then((jsMoreTs) => {
+      if (!jsMoreTs) return
+      console.log('这是一个 TypeScript 项目，如果不是请删除 tsconfig.json')
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 module.exports = {
   extends: [
+    'prettier',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
+    '@halodong/eslint-config-basic',
   ],
   parser: '@babel/eslint-parser',
   plugins: ['react', 'jest', '@babel', 'unicorn', 'react-hooks'],
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+    mocha: true,
+    jest: true,
+    jasmine: true,
+  },
   rules: {
     strict: ['error', 'never'],
     '@babel/new-cap': 0,
     '@babel/no-invalid-this': 0,
     '@babel/no-unused-expressions': 2,
     '@babel/object-curly-spacing': 0,
-    '@babel/semi': ["error", "never"],
     'react/display-name': 0,
     'react/jsx-props-no-spreading': 0,
     'react/state-in-constructor': 0,
@@ -76,7 +109,9 @@ module.exports = {
     // support import modules from TypeScript files in JavaScript files
     'import/resolver': {
       node: {
-        extensions: isTsProject ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] : ['.js', '.jsx'],
+        extensions: isTsProject
+          ? ['.js', '.jsx', '.ts', '.tsx', '.d.ts']
+          : ['.js', '.jsx'],
       },
     },
     'import/parsers': {
@@ -94,6 +129,8 @@ module.exports = {
         {
           files: ['**/*.{ts,tsx}'],
           parser: '@typescript-eslint/parser',
+          rules: tsEslintConfig,
+          extends: ['prettier', 'plugin:@typescript-eslint/recommended'],
         },
       ]
     : [],
